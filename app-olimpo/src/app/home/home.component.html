@@ -1,0 +1,188 @@
+<mat-card class="card-principal">
+    <mat-card-subtitle>Colegio el Olimpo</mat-card-subtitle>
+
+    <br>
+    <mat-card-title>¿Que desea consultar?</mat-card-title>
+    <mat-card-actions>
+
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Profesores
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacion de los profesores
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Eje. Camilo" #input>
+                </mat-form-field>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort>
+
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                        </ng-container>
+
+                        <!-- asignatura Column -->
+                        <ng-container matColumnDef="asignatura">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignaturas </th>
+                            <td mat-cell *matCellDef="let row"> <button mat-button (click)="openDialog()"
+                                    color="primary">Primary</button></td>
+                        </ng-container>
+
+                        <!-- nombre Column -->
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                        </ng-container>
+
+                        <!-- profesores Column -->
+                        <ng-container matColumnDef="profesores">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estudiantes </th>
+                            <td mat-cell *matCellDef="let row"> <button mat-stroked-button
+                                    color="primary">Primary</button></td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+                    </mat-paginator>
+                </div>
+
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Estudiantes
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacion de los estudiantes
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput (keyup)="applyFilterEstudiantes($event)" placeholder="Eje. Camilo" #input>
+                </mat-form-field>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSourceEstudiantes" matSort>
+
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                        </ng-container>
+
+                        <!-- asignatura Column -->
+                        <ng-container matColumnDef="asignatura">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignaturas </th>
+                            <td mat-cell *matCellDef="let row"> <button mat-stroked-button
+                                    color="primary">Primary</button></td>
+                        </ng-container>
+
+                        <!-- nombre Column -->
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                        </ng-container>
+
+                        <!-- profesores Column -->
+                        <ng-container matColumnDef="profesores">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Profesor </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+                    </mat-paginator>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Cursos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacion de los cursos
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput (keyup)="applyFilterAsignaturas($event)" placeholder="Eje. Camilo" #input>
+                </mat-form-field>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSourceAsignaturas" matSort>
+
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                        </ng-container>
+
+                        <!-- asignatura Column -->
+                        <ng-container matColumnDef="Docente">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Docente </th>
+                            <td mat-cell *matCellDef="let row"> {{row.profesor.nombre}} </td>
+                        </ng-container>
+
+                        <!-- nombre Column -->
+                        <ng-container matColumnDef="Materia">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Materia </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                        </ng-container>
+
+                        <!-- profesores Column -->
+                        <ng-container matColumnDef="Curso">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                            <td mat-cell *matCellDef="let row"> {{row.curso.salon}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsCu"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsCu;"></tr>
+
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+                    </mat-paginator>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </mat-card-actions>
+</mat-card>
